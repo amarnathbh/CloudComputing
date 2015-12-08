@@ -1,0 +1,4 @@
+launchConfigurations/
+.DS_Store
+*.class
+/bin

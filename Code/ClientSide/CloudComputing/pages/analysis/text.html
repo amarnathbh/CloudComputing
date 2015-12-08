@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Database Analysis</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.5 -->
+  <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+  <script src="sweetalert.min.js"></script> 
+  <link rel="stylesheet" type="text/css" href="sweetalert.css">
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+  <header class="main-header">
+    <!-- Logo -->
+    <a href="../../index.html" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>D</b>A</span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>Database</b>Analysis</span>
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <ul class="sidebar-menu">
+       
+        <li class="active treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="../../index.html"><i class="fa fa-circle-o"></i> Home </a></li>
+            <li><a href="result.html"><i class="fa fa-circle-o text-aqua"></i> <span>Analyze Performance</span></a></li>
+            <li><a href="text.html"><i class="fa fa-circle-o text-green"></i> <span>Store</span></a></li>
+            <li><a href="image.html"><i class="fa fa-circle-o text-yellow"></i> <span>Retrieve</span></a></li> 
+            <li><a href="sample.html"><i class="fa fa-circle-o text-red"></i> <span>XYZ Analysis</span></a></li> 
+          </ul>
+          </ul>
+        </li>
+       
+        </selection> 
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Store
+       
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="../../index.html"><i class="fa fa-dashboard"></i> Home</a></li>
+        
+        <li class="active">Visualization</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+         <div class = "row">
+                
+                  <div class="input-group">
+                      <br>
+                      <b>Select the database :: </b> 
+                      <select id = "database">
+                        <option id = "mongo" value="mongo">MongoDB</option>
+                        <option id = "cloudant" value="cloudant">CloudantDB</option>
+                      </select>
+                      <br>
+                      <b>University				 ::  </b> <input type="text" id="University"><br>
+                      <b>Year						   ::  </b><td> <input type="text" id="Year"></td><br>
+	                    <b>Total Applicants			     ::  </b> <input type="text" id="Total Applicants"><br>
+                      <b>Total Graduate Admissions ::  </b> <input type="text" id="Total Graduate Admissions"><br>
+	                    <b>Admissions Men			 ::  </b> <input type="text" id="Admissions Men"><br>
+                      <b>Admissions Women		 ::  </b> <input type="text" id="Admissions Women"><br>
+	                    <b>Total Enrolled			 ::  </b> <input type="text" id="Total Enrolled"><br>
+                      <b>Enrolled  Men			 ::  </b> <input type="text" id="Enrolled  Men"><br>
+	                    <b>Enrolled Women			 ::  </b> <input type="text" id="Enrolled Women"><br>
+                      <b>Chances of Admission		 ::  </b> <input type="text" id="Chances of Admission"><br>
+	                    <b>Undergrad Total			 ::  </b> <input type="text" id="Undergrad Total"><br>
+                      <b>Admissions UG Men			 ::  </b> <input type="text" id="Admissions UG Men"><br>
+                      <b>Admissions UG Women		 ::  </b> <input type="text" id="Admissions UG Women"><br>
+	                    <b>Enrolled UG Men			 ::  </b> <input type="text" id="Enrolled UG Men"><br>
+	                    <b>Enrolled UG Women			 ::  </b> <input type="text" id="Enrolled UG Women"><br>
+                      <b>Chances of UG Admission		 ::  </b> <input type="text" id="Chances of UG Admission"><br>
+                      
+                      <button type="submit" onClick="myFunction()" label="Store" value="Store">Store</button>
+                      
+                      <script>
+                          function myFunction() {
+                               // https://$USERNAME.cloudant.com/$DATABASE
+                               var dbType = document.getElementById("database").value;
+                               if (dbType == "mongo"){                                                          
+                                $.ajax({  
+		                              type: "POST",  
+		                              url : "https://api.mongolab.com/api/1/databases/sampledb/collections/sample?apiKey=hr13z2FWkjHZZ2xmn2AWBDeqOm0Y1RfU",
+                                  contentType: "application/json",  
+		                              data: JSON.stringify( { "University" 				: document.getElementById("University").value,
+						                                            "Year" 					  	: document.getElementById("Year").value,
+					                                              "Total Applicants"	: document.getElementById("Total Applicants").value,
+                                                        "Total Graduate Admissions"  : document.getElementById("Total Graduate Admissions").value,
+                                                        "Admissions Men"			       : document.getElementById("Admissions Men").value,
+                                                        "Admissions Women"			: document.getElementById("Admissions Women").value,
+                                                        "Total Enrolled"		    : document.getElementById("Total Enrolled").value,
+                                                        "Enrolled  Men"			    : document.getElementById("Enrolled  Men").value,
+                                                        "Enrolled Women"		    : document.getElementById("Enrolled Women").value,
+                                                        "Chances of Admission"	: document.getElementById("Chances of Admission").value,
+                                                        "Undergrad Total"       : document.getElementById("Undergrad Total").value,
+                                                        "Admissions UG Men"		  : document.getElementById("Admissions UG Men").value,
+                                                        "Admissions UG Women"		: document.getElementById("Admissions UG Women").value,
+                                                        "Enrolled UG Men"			  : document.getElementById("Enrolled UG Men").value,
+                                                        "Enrolled UG Women"		  : document.getElementById("Enrolled UG Women").value,
+                                                        "Chances of UG Admission"	: document.getElementById("Chances of UG Admission").value,
+                                                        "Year_School_ID"        : document.getElementById("Year").value + "_" +document.getElementById("University").value
+                                  } ),						 					  
+		                              success: function(result){  
+                                         console.log("Data : " + JSON.stringify(result));
+                                         //drawCHart(result);
+                                         //  swal({  title: "Result",   
+                                         //          text: "Your text has a "+result+ " sen timent",
+                                         //          confirmButtonText: "Search Again" });
+			                           },
+		                              failure: function(result){
+			                             alert ("failure");
+		                              }
+                                }); 
+                               } 
+                               else if (dbType == "cloudant"){  
+                                  console.log(document.getElementById("database").value);
+                                  $.ajax({  
+		                              type: "POST",  
+		                              url : "https://tshedhani.cloudant.com/firstdb",
+                                  contentType: "application/json",  
+		                              data: JSON.stringify( { "University" 				: document.getElementById("University").value,
+						                                            "Year" 					  	: document.getElementById("Year").value,
+					                                              "Total Applicants"	: document.getElementById("Total Applicants").value,
+                                                        "Total Graduate Admissions"  : document.getElementById("Total Graduate Admissions").value,
+                                                        "Admissions Men"			       : document.getElementById("Admissions Men").value,
+                                                        "Admissions Women"			: document.getElementById("Admissions Women").value,
+                                                        "Total Enrolled"		    : document.getElementById("Total Enrolled").value,
+                                                        "Enrolled  Men"			    : document.getElementById("Enrolled  Men").value,
+                                                        "Enrolled Women"		    : document.getElementById("Enrolled Women").value,
+                                                        "Chances of Admission"	: document.getElementById("Chances of Admission").value,
+                                                        "Undergrad Total"       : document.getElementById("Undergrad Total").value,
+                                                        "Admissions UG Men"		  : document.getElementById("Admissions UG Men").value,
+                                                        "Admissions UG Women"		: document.getElementById("Admissions UG Women").value,
+                                                        "Enrolled UG Men"			  : document.getElementById("Enrolled UG Men").value,
+                                                        "Enrolled UG Women"		  : document.getElementById("Enrolled UG Women").value,
+                                                        "Chances of UG Admission"	: document.getElementById("Chances of UG Admission").value,
+                                                        "_id"                     : document.getElementById("Year").value + "_" +document.getElementById("University").value
+                                  } ),						 					  
+		                              success: function(result){  
+                                         console.log("Data : " + JSON.stringify(result));
+                                         //drawCHart(result);
+                                         //  swal({  title: "Result",   
+                                         //          text: "Your text has a "+result+ " sen timent",
+                                         //          confirmButtonText: "Search Again" });
+			                           },
+		                              failure: function(result){
+			                             alert ("failure");
+		                              }
+                                }); 
+                                
+                               }                         
+                          }
+                      </script>
+                    </div>                
+			</div>
+      <!-- /.row -->
+
+    </section>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+ 
+  </aside>
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+<!-- jQuery 2.1.4 -->
+
+<!-- Bootstrap 3.3.5 -->
+<script src="../../bootstrap/js/bootstrap.min.js"></script>
+<!-- ChartJS 1.0.1 -->
+<script src="../../plugins/chartjs/Chart.min.js"></script>
+<!-- FastClick -->
+<script src="../../plugins/fastclick/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/app.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+<!-- page script -->
+
+</body>
+</html>
